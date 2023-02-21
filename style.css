@@ -31,9 +31,13 @@ body{
 .display{
     width: 280px;
     height: 100px;
+    display: grid;
+    grid-template-columns: auto,3fr;
     background-color: rgb(51, 50, 50);
     border-radius: 20px;
+    justify-content: space-between;
 }
+
 
 .display .resultado{
     color: white;
@@ -45,10 +49,12 @@ body{
     font-size: 1.5em;
     margin-right: 10px;
     text-overflow: ellipsis;
+    grid-column: 1/3;
 }
 .display .resultado.actual{
     font-size: 1.2em;
     margin-right: 10px;
+    grid-column: 2/3;
 }
 
 .calculadora .botones{
