@@ -5,14 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Ejercicio 3</title>
+    <title>Calculadora | Calculando...</title>
 </head>
 <body>
     <div class="container">
         <div class="calculadora">
             <div class="display">
-                <div class="resultado anterior">35+</div>
-                <div class="resultado actual">345</div>
+                <div id="resultadoAnterior" class="resultado anterior"></div>
+                <div id="signoOperacion" class="resultado signoOperacion"></div>
+                <div id="resultadoActual" class="resultado actual"></div>
             </div>
             <div class="botones">
                 <button class="boton borrarTodo">C</button>
@@ -37,6 +38,6 @@
         </div>
     </div>
 
-    <script src="calculadora.js"></script>
+    <script src="calculadora.js" type="module"></script>
 </body>
 </html>
