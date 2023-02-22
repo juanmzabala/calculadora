@@ -48,7 +48,7 @@ function manejadorBotones(boton){
 function seOprimioNumero(boton){
     if (displayResultadoAnterior.textContent !== "" && displaySignoOperacion.textContent === ""){
         actualizarDisplayAnterior("");
-    }
+    };
     
     if(boton.textContent === "0" && displayResultadoActual.textContent === ""){
          actualizarDisplayActual("0");
@@ -78,6 +78,8 @@ function seOprimioOperador(boton){
         }else if(a !== "" && b === ""){
             actualizarDisplayOperador(boton.textContent);
             actualizarDisplayActual("");
+        }else if(a === "" && b === ""){
+            return;
         }else{
             actualizarDisplayOperador(boton.textContent);
             actualizarDisplayAnterior(b);
@@ -115,10 +117,11 @@ function seOprimioPunto(){
     if (displayResultadoAnterior.textContent !== "" && displaySignoOperacion.textContent === ""){
         actualizarDisplayAnterior("");
     }
-    
+
     if (displayResultadoActual.textContent.includes(".")){
         return;
     }
+
     if(displayResultadoActual.textContent === ""){
         actualizarDisplayActual("0.");
     }else{
@@ -128,5 +131,4 @@ function seOprimioPunto(){
 
 function calcular(a,b,operador){
     actualizarDisplayAnterior(elegirOperacion(a,b,operador));
-
-}
+};
