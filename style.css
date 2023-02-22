@@ -36,8 +36,13 @@ body{
     background-color: rgb(51, 50, 50);
     border-radius: 20px;
     justify-content: space-between;
+    white-space:nowrap;
+    overflow:scroll;
 }
-
+.signoOperacion{
+    width: 20px;
+    text-align: start;
+}
 
 .display .resultado{
     color: white;
@@ -48,13 +53,14 @@ body{
 .display .resultado.anterior{
     font-size: 1.5em;
     margin-right: 10px;
-    text-overflow: ellipsis;
+    text-overflow:clip;
     grid-column: 1/3;
 }
 .display .resultado.actual{
     font-size: 1.2em;
     margin-right: 10px;
     grid-column: 2/3;
+    text-overflow:clip;
 }
 
 .calculadora .botones{
