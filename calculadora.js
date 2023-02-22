@@ -1,4 +1,4 @@
-import {suma,resta,multiplicacion,division} from "./operaciones.js"
+import {elegirOperacion} from "./operaciones.js"
 
 const displayResultadoAnterior = document.querySelector("#resultadoAnterior");
 const displayResultadoActual = document.querySelector("#resultadoActual");
@@ -19,38 +19,42 @@ document.addEventListener("click",(event)=>{
 function manejadorBotones(boton){
     
     if(boton.classList.contains("numero")){
-        console.log(`Se primió el número ${boton.textContent}`);
+        console.log(`Se oprimió el número ${boton.textContent}`);
         seOprimioNumero(boton);
     }
 
     if(boton.classList.contains("operador")){
-        console.log(`Se primió el operador ${boton.textContent}`);
+        console.log(`Se oprimió el operador ${boton.textContent}`);
         seOprimioOperador(boton);
     };
 
     if(boton.classList.contains("borrarTodo")){
-        console.log(`Se primió Borrar Todo`);
+        console.log(`Se oprimió Borrar Todo`);
         borrarTodo();
     }
 
     if(boton.classList.contains("borrar")){
-        console.log(`Se primió Borrar Individualmente`);
+        console.log(`Se oprimió Borrar Individualmente`);
         borrarIndividual();
     };
 
     if(boton.classList.contains("punto")){
-        console.log(`Se primió el punto`);
+        console.log(`Se oprimió el punto`);
         seOprimioPunto();
     }
 };
 
 
 function seOprimioNumero(boton){
+    if (displayResultadoAnterior.textContent !== "" && displaySignoOperacion.textContent === ""){
+        actualizarDisplayAnterior("");
+    }
+    
     if(boton.textContent === "0" && displayResultadoActual.textContent === ""){
-        actualizarDisplayActual("0");
+         actualizarDisplayActual("0");
     }else{
         if(displayResultadoActual.textContent === "0"){
-            actualizarDisplayActual(boton.textContent);
+             actualizarDisplayActual(boton.textContent);
         }else{
             actualizarDisplayActual(displayResultadoActual.textContent + boton.textContent);
         };
@@ -58,41 +62,28 @@ function seOprimioNumero(boton){
 };
 
 function seOprimioOperador(boton){
-    let data;
     const a = displayResultadoAnterior.textContent;
     const b = displayResultadoActual.textContent;
     if(boton.textContent === "="){
-        if(a !== "" && b !== ""){
-            switch (displaySignoOperacion.textContent){
-                case "+":
-                    data = suma(a ,b);
-                    break;
-                case "-":
-                    data= resta(a,b);
-                    break;
-                case "x":
-                    data=multiplicacion(a,b);
-                    break;
-                case "%":
-                    data=division(a,b);
-                    break;
-            }
-            actualizarDisplayAnterior(data);
+        if(a !== "" && b !== ""){ 
+            calcular(a,b,displaySignoOperacion.textContent)
             actualizarDisplayOperador("");
             actualizarDisplayActual("");
         }
-    }else{
-        if(displayResultadoAnterior.textContent === ""){
+    } else{
+        if (a !== "" && b !== ""){
+            calcular(a,b,displaySignoOperacion.textContent)
             actualizarDisplayOperador(boton.textContent);
-            actualizarDisplayAnterior(b);
+            actualizarDisplayActual("");
+        }else if(a !== "" && b === ""){
+            actualizarDisplayOperador(boton.textContent);
             actualizarDisplayActual("");
         }else{
             actualizarDisplayOperador(boton.textContent);
+            actualizarDisplayAnterior(b);
+            actualizarDisplayActual("");
         };
-        
     }
-    
-
 }
 
 
@@ -121,6 +112,10 @@ function borrarIndividual(){
 
 
 function seOprimioPunto(){
+    if (displayResultadoAnterior.textContent !== "" && displaySignoOperacion.textContent === ""){
+        actualizarDisplayAnterior("");
+    }
+    
     if (displayResultadoActual.textContent.includes(".")){
         return;
     }
@@ -130,3 +125,8 @@ function seOprimioPunto(){
         actualizarDisplayActual(displayResultadoActual.textContent + ".");
     };  
 };
+
+function calcular(a,b,operador){
+    actualizarDisplayAnterior(elegirOperacion(a,b,operador));
+
+}
